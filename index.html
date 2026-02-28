@@ -111,8 +111,8 @@
             transition: all 0.3s;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             flex: 1;
-            min-width: 250px;
-            max-width: 350px;
+            min-width: 280px;
+            max-width: 400px;
         }
         
         .user-type-card:hover {
@@ -398,6 +398,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
         
         .marketplace-info h3 {
@@ -483,25 +485,6 @@
             color: #2ecc71;
         }
         
-        .photo-preview-container {
-            margin-top: 15px;
-            text-align: center;
-        }
-        
-        .photo-preview {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #2ecc71;
-            margin: 10px auto;
-            display: none;
-        }
-        
-        .photo-preview.show {
-            display: block;
-        }
-        
         @media (max-width: 768px) {
             .stats-grid, .action-grid, .reward-grid {
                 grid-template-columns: 1fr;
@@ -549,22 +532,17 @@
     </header>
 
     <div class="container">
-        <!-- User Type Selector -->
+        <!-- User Type Selector (Hanya 2 Tipe) -->
         <div class="user-type-selector" id="userTypeSelector">
             <div class="user-type-card" onclick="selectUserType('individual')" id="card-individual">
                 <div class="user-type-icon">👤</div>
                 <h3>Individu/Komunitas</h3>
-                <p>Pelacak jejak karbon pribadi</p>
-            </div>
-            <div class="user-type-card" onclick="selectUserType('provider')" id="card-provider">
-                <div class="user-type-icon">📊</div>
-                <h3>Penyedia data karbon</h3>
-                <p>Verifikasi dan validasi data</p>
+                <p>Lacak jejak karbon & jual kredit</p>
             </div>
             <div class="user-type-card" onclick="selectUserType('company')" id="card-company">
                 <div class="user-type-icon">🏢</div>
                 <h3>Perusahaan</h3>
-                <p>Pembeli kredit karbon</p>
+                <p>Beli kredit karbon untuk offset</p>
             </div>
         </div>
 
@@ -575,15 +553,10 @@
                 <div class="form-group">
                     <label>Email</label>
                     <input type="email" id="loginEmail" required>
-                    <div class="error-message" id="loginEmailError">Email tidak valid</div>
                 </div>
                 <div class="form-group">
                     <label>Password</label>
                     <input type="password" id="loginPassword" required minlength="6">
-                    <div class="error-message" id="loginPasswordError">Password minimal 6 karakter</div>
-                </div>
-                <div style="text-align: right; margin-bottom: 20px;">
-                    <a href="#" style="color: #2ecc71; text-decoration: none;">Lupa password?</a>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Log In</button>
                 <p style="text-align: center; margin-top: 20px;">
@@ -599,35 +572,26 @@
                 <div class="form-group">
                     <label id="nameLabel">Nama Lengkap / Nama Perusahaan</label>
                     <input type="text" id="registerName" required minlength="3">
-                    <div class="error-message" id="registerNameError">Nama minimal 3 karakter</div>
                 </div>
                 <div class="form-group">
                     <label>Email</label>
                     <input type="email" id="registerEmail" required>
-                    <div class="error-message" id="registerEmailError">Email tidak valid</div>
-                </div>
-                <div class="form-group" id="companyNameGroup" style="display: none;">
-                    <label>Nama Perusahaan</label>
-                    <input type="text" id="registerCompanyName">
                 </div>
                 <div class="form-group">
                     <label>Password</label>
                     <input type="password" id="registerPassword" required minlength="6">
-                    <div class="error-message" id="registerPasswordError">Password minimal 6 karakter</div>
                     <div class="progress-bar" style="margin-top: 5px;">
                         <div class="progress-fill" id="passwordStrength" style="width: 0%"></div>
                     </div>
-                    <small style="color: #666;">Kekuatan password</small>
                 </div>
                 <div class="form-group">
                     <label>Konfirmasi Password</label>
                     <input type="password" id="registerConfirmPassword" required>
-                    <div class="error-message" id="registerConfirmError">Password tidak cocok</div>
                 </div>
                 <div class="form-group">
                     <label style="font-weight: normal;">
                         <input type="checkbox" required style="width: auto; margin-right: 10px;">
-                        Saya setuju dengan <a href="#" style="color: #2ecc71;">Syarat & Ketentuan</a> serta <a href="#" style="color: #2ecc71;">Kebijakan Privasi</a> ReCarbon
+                        Saya setuju dengan <a href="#" style="color: #2ecc71;">Syarat & Ketentuan</a>
                     </label>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
@@ -642,7 +606,7 @@
             <div class="nav-menu">
                 <button class="nav-item active" onclick="showSection('individual', 'home')">🏠 Beranda</button>
                 <button class="nav-item" onclick="showSection('individual', 'history')">📜 Riwayat</button>
-                <button class="nav-item" onclick="showSection('individual', 'credits')">🌱 Kredit Karbon Saya</button>
+                <button class="nav-item" onclick="showSection('individual', 'credits')">🌱 Kredit Karbon</button>
                 <button class="nav-item" onclick="showSection('individual', 'rewards')">🎁 Reward</button>
                 <button class="nav-item" onclick="showSection('individual', 'settings')">⚙️ Pengaturan</button>
             </div>
@@ -651,7 +615,7 @@
             <div class="dashboard-section active" id="individual-home">
                 <div class="welcome-message">
                     <h2>Halo, Pejuang Iklim! 👋</h2>
-                    <p>Mari kurangi jejak karbonmu hari ini.</p>
+                    <p>Aksi hijau kamu = Kredit karbon yang bisa dijual!</p>
                 </div>
 
                 <div class="stats-grid">
@@ -659,17 +623,16 @@
                         <div class="stat-icon">⭐</div>
                         <div class="stat-value" id="indTotalPoints">0</div>
                         <div class="stat-label">Total Poin</div>
-                        <div style="margin-top: 10px; font-size: 0.9em; color: #666;">Pemula</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon">🌍</div>
                         <div class="stat-value" id="indCO2Reduction">0 kg</div>
-                        <div class="stat-label">Pengurangan CO2</div>
+                        <div class="stat-label">Pengurangan CO₂</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon">✅</div>
-                        <div class="stat-value" id="indMonthlyActions">0</div>
-                        <div class="stat-label">Aksi Bulan Ini</div>
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-value" id="indCarbonCredits">0 kg</div>
+                        <div class="stat-label">Kredit Tersedia</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon">🎯</div>
@@ -682,13 +645,13 @@
                 </div>
 
                 <h2 style="margin: 30px 0 20px; color: #2ecc71;">🚀 Mulai Aksi Hijau</h2>
-                <p style="margin-bottom: 20px;">Pilih aksi dan dapatkan poin instan!</p>
+                <p style="margin-bottom: 20px;">Setiap aksi menghasilkan kredit karbon!</p>
 
                 <div class="action-grid">
                     <div class="action-card" onclick="showActionForm('transport')">
                         <div class="action-icon">🚴</div>
                         <h3>Transport</h3>
-                        <p>Bersepeda, jalan kaki, atau transportasi umum</p>
+                        <p>Bersepeda, jalan kaki, transportasi umum</p>
                     </div>
                     <div class="action-card" onclick="showActionForm('plant')">
                         <div class="action-icon">🌱</div>
@@ -703,7 +666,7 @@
                     <div class="action-card" onclick="showActionForm('energy')">
                         <div class="action-icon">⚡</div>
                         <h3>Energi</h3>
-                        <p>Hemat energi dan gunakan energi terbarukan</p>
+                        <p>Hemat energi dan energi terbarukan</p>
                     </div>
                 </div>
 
@@ -717,14 +680,13 @@
                             <label>📍 Lokasi GPS</label>
                             <div style="display: flex; gap: 10px; align-items: center;">
                                 <span id="locationStatus">Menunggu izin lokasi...</span>
-                                <button type="button" class="btn btn-secondary" onclick="getLocation()" style="padding: 5px 15px; font-size: 0.9em;">🔄 Refresh Lokasi</button>
+                                <button type="button" class="btn btn-secondary" onclick="getLocation()" style="padding: 5px 15px; font-size: 0.9em;">🔄 Refresh</button>
                             </div>
                         </div>
                         
                         <div class="form-group">
                             <label>📸 Upload Bukti Foto</label>
                             <input type="file" id="actionPhoto" accept="image/*" required>
-                            <small style="color: #666;">Foto bukti wajib diupload</small>
                         </div>
                         
                         <div class="form-group">
@@ -745,17 +707,15 @@
                                 <option value="sepeda">Sepeda</option>
                                 <option value="jalan">Jalan Kaki</option>
                                 <option value="umum">Transportasi Umum</option>
-                                <option value="carpool">Carpool</option>
                             </select>
                         </div>
 
                         <div class="form-group hidden" id="treeTypeGroup">
                             <label>🌳 Jenis Pohon</label>
                             <select id="treeType">
-                                <option value="">Pilih Jenis Pohon</option>
+                                <option value="">Pilih Jenis</option>
                                 <option value="buah">Pohon Buah</option>
                                 <option value="hutan">Pohon Hutan</option>
-                                <option value="hias">Pohon Hias</option>
                                 <option value="bakau">Pohon Bakau</option>
                             </select>
                         </div>
@@ -767,20 +727,13 @@
                                 <option value="plastik">Plastik</option>
                                 <option value="kertas">Kertas</option>
                                 <option value="logam">Logam</option>
-                                <option value="kaca">Kaca</option>
-                                <option value="organik">Organik</option>
                             </select>
-                        </div>
-
-                        <div class="form-group hidden" id="electricityBillGroup">
-                            <label>⚡ Upload Tagihan Listrik (kWh)</label>
-                            <input type="file" id="electricityBill" accept=".pdf,.jpg,.png">
                         </div>
                     </div>
 
                     <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; margin: 20px 0;">
                         <h4>⏳ Status Validasi</h4>
-                        <p>Lengkapi semua persyaratan untuk submit</p>
+                        <p>Data akan diverifikasi sebelum jadi kredit</p>
                         <div style="margin-top: 10px;">
                             <strong>Estimasi Poin:</strong> <span id="estimatedPoints" style="color: #2ecc71; font-size: 1.2em;">+0 Poin</span>
                         </div>
@@ -789,95 +742,41 @@
                     <button class="btn btn-primary" onclick="submitAction()" style="width: 100%;">Kirim Aksi</button>
                     <button class="btn btn-secondary" onclick="hideActionForm()" style="width: 100%; margin-top: 10px;">Batal</button>
                 </div>
-
-                <h3 style="margin: 30px 0 20px;">🕒 Aktivitas Terbaru</h3>
-                <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; color: #666;">
-                    Belum ada aktivitas
-                </div>
-
-                <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 25px; border-radius: 15px; margin: 30px 0;">
-                    <h3>👑 ReCarbon Club</h3>
-                    <p>Kumpulkan poin untuk naik level</p>
-                    <div style="display: flex; justify-content: space-around; margin: 20px 0;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 2em;">Lvl 1</div>
-                            <small>Pemula</small>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 2em;">Lvl 2</div>
-                            <small>Pejuang</small>
-                        </div>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 0%"></div>
-                    </div>
-                    <p style="text-align: center; margin-top: 10px;">0/1000 poin ke level berikutnya</p>
-                </div>
-
-                <h3 style="margin: 30px 0 20px;">🏅 Lencana Pencapaian</h3>
-                <div class="badge-grid">
-                    <div class="badge">🌱</div>
-                    <div class="badge">🚴</div>
-                    <div class="badge">♻️</div>
-                    <div class="badge">⚡</div>
-                </div>
-
-                <h3 style="margin: 30px 0 20px;">🎁 Reward Populer</h3>
-                <div class="reward-grid">
-                    <div class="reward-card">
-                        <div class="reward-icon">🛍️</div>
-                        <h4>Voucher Belanja</h4>
-                        <p>Diskon 50%</p>
-                        <div class="reward-points">5000 Poin</div>
-                    </div>
-                    <div class="reward-card">
-                        <div class="reward-icon">💳</div>
-                        <h4>E-Wallet 10rb</h4>
-                        <p>Saldo Digital</p>
-                        <div class="reward-points">10000 Poin</div>
-                    </div>
-                </div>
             </div>
 
             <!-- Individual History Section -->
             <div class="dashboard-section" id="individual-history">
                 <h2 style="margin-bottom: 20px; color: #2ecc71;">📜 Riwayat Aksi</h2>
-                <p style="margin-bottom: 20px;">Lihat semua kontribusi hijau yang telah kamu lakukan.</p>
-                
                 <table>
                     <thead>
                         <tr>
                             <th>Tanggal</th>
-                            <th>Jenis Aksi</th>
-                            <th>Kategori</th>
+                            <th>Jenis</th>
                             <th>Jumlah</th>
                             <th>Poin</th>
-                            <th>Status Validasi</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody id="actionHistoryTable">
                         <tr>
-                            <td colspan="6" style="text-align: center; color: #666;">Belum ada riwayat aktivitas</td>
+                            <td colspan="5" style="text-align: center; color: #666;">Belum ada riwayat</td>
                         </tr>
                     </tbody>
                 </table>
-                
-                <button class="btn btn-secondary" onclick="resetData()" style="margin-top: 20px;">🗑️ Reset Data</button>
             </div>
 
             <!-- Individual Credits Section -->
             <div class="dashboard-section" id="individual-credits">
                 <h2 style="margin-bottom: 20px; color: #2ecc71;">🌱 Kredit Karbon Saya</h2>
-                <p style="margin-bottom: 20px;">Kredit karbon Anda siap diperjualbelikan di marketplace</p>
+                <p style="margin-bottom: 20px;">Kredit kamu tersedia di marketplace untuk dibeli perusahaan</p>
                 
                 <div class="stat-card" style="margin-bottom: 30px;">
                     <div class="stat-icon">🌍</div>
-                    <div class="stat-value" id="individualCarbonCredits">0 kg CO2</div>
-                    <div class="stat-label">Total Kredit Karbon Tersedia</div>
-                    <p style="margin-top: 15px; color: #666;">Kredit karbon Anda akan muncul di marketplace untuk dibeli perusahaan</p>
+                    <div class="stat-value" id="individualCarbonCredits">0 kg CO₂</div>
+                    <div class="stat-label">Total Kredit Tersedia</div>
                 </div>
 
-                <h3 style="margin: 30px 0 20px;">Riwayat Kredit Karbon</h3>
+                <h3 style="margin: 30px 0 20px;">Riwayat Kredit</h3>
                 <table>
                     <thead>
                         <tr>
@@ -889,7 +788,7 @@
                     </thead>
                     <tbody id="carbonCreditTable">
                         <tr>
-                            <td colspan="4" style="text-align: center; color: #666;">Belum ada kredit karbon</td>
+                            <td colspan="4" style="text-align: center; color: #666;">Belum ada kredit</td>
                         </tr>
                     </tbody>
                 </table>
@@ -898,55 +797,27 @@
             <!-- Individual Rewards Section -->
             <div class="dashboard-section" id="individual-rewards">
                 <h2 style="margin-bottom: 20px; color: #2ecc71;">🎁 Reward Store</h2>
-                <p style="margin-bottom: 20px;">Tukarkan poinmu dengan hadiah menarik!</p>
-                
                 <div class="stat-card" style="margin-bottom: 30px;">
                     <div class="stat-value" id="availablePoints" style="color: #2ecc71;">0 Poin</div>
-                    <div class="stat-label">Tersedia 🛍️</div>
                 </div>
-
                 <div class="reward-grid">
                     <div class="reward-card">
                         <div class="reward-icon">🛍️</div>
                         <h4>Voucher Belanja</h4>
-                        <p>Diskon 50% di toko mitra</p>
                         <div class="reward-points">5000 Poin</div>
                         <button class="btn btn-primary" onclick="redeemReward(5000)">Tukar</button>
                     </div>
                     <div class="reward-card">
                         <div class="reward-icon">💳</div>
                         <h4>E-Wallet 10rb</h4>
-                        <p>Saldo digital langsung masuk</p>
                         <div class="reward-points">10000 Poin</div>
                         <button class="btn btn-primary" onclick="redeemReward(10000)">Tukar</button>
                     </div>
                     <div class="reward-card">
                         <div class="reward-icon">🌳</div>
                         <h4>Tanam Pohon</h4>
-                        <p>Atas namamu di hutan Indonesia</p>
                         <div class="reward-points">15000 Poin</div>
                         <button class="btn btn-primary" onclick="redeemReward(15000)">Tukar</button>
-                    </div>
-                    <div class="reward-card">
-                        <div class="reward-icon">☕</div>
-                        <h4>Voucher Kopi</h4>
-                        <p>Gratis 1 gelas kopi lokal</p>
-                        <div class="reward-points">3000 Poin</div>
-                        <button class="btn btn-primary" onclick="redeemReward(3000)">Tukar</button>
-                    </div>
-                    <div class="reward-card">
-                        <div class="reward-icon">🎫</div>
-                        <h4>Tiket Bioskop</h4>
-                        <p>Nonton gratis 1 tiket</p>
-                        <div class="reward-points">20000 Poin</div>
-                        <button class="btn btn-primary" onclick="redeemReward(20000)">Tukar</button>
-                    </div>
-                    <div class="reward-card">
-                        <div class="reward-icon">🎁</div>
-                        <h4>Mystery Box</h4>
-                        <p>Hadiah kejutan ramah lingkungan</p>
-                        <div class="reward-points">25000 Poin</div>
-                        <button class="btn btn-primary" onclick="redeemReward(25000)">Tukar</button>
                     </div>
                 </div>
             </div>
@@ -954,96 +825,25 @@
             <!-- Individual Settings Section -->
             <div class="dashboard-section" id="individual-settings">
                 <h2 style="margin-bottom: 20px; color: #2ecc71;">⚙️ Pengaturan</h2>
-                <p style="margin-bottom: 30px;">Kelola preferensi akunmu di sini.</p>
-
                 <div class="form-container">
                     <h3 style="margin-bottom: 20px; color: #2ecc71;">👤 Profil Akun</h3>
-                    
-                    <!-- Profile Photo Upload -->
                     <div class="form-group" style="text-align: center;">
                         <div class="profile-photo-container" style="margin: 0 auto 15px;">
                             <img id="settingsProfilePhoto" class="profile-photo" src="" alt="Foto Profil" style="display: none;">
                             <div class="profile-photo" id="settingsProfilePhotoPlaceholder">U</div>
-                            <label for="settingsProfileInput" class="profile-photo-edit" title="Ubah Foto">
-                                📷
-                            </label>
+                            <label for="settingsProfileInput" class="profile-photo-edit" title="Ubah Foto">📷</label>
                             <input type="file" id="settingsProfileInput" class="profile-photo-input" accept="image/*" onchange="updatePhoto(event, 'settings')">
                         </div>
-                        <small style="color: #666;">Klik ikon kamera untuk ubah foto</small>
                     </div>
-                    
                     <div class="form-group">
                         <label>Nama</label>
-                        <div style="display: flex; gap: 10px; align-items: center;">
-                            <span id="settingsName" style="flex: 1; padding: 10px; background: #f8f9fa; border-radius: 8px;">-</span>
-                            <button class="btn btn-secondary" onclick="editProfile()">Edit</button>
-                        </div>
+                        <span id="settingsName" style="padding: 10px; background: #f8f9fa; border-radius: 8px; display: block;">-</span>
                     </div>
                     <div class="form-group">
                         <label>Email</label>
                         <span id="settingsEmail" style="padding: 10px; background: #f8f9fa; border-radius: 8px; display: block;">-</span>
                     </div>
-                </div>
-
-                <div class="form-container">
-                    <h3 style="margin-bottom: 20px; color: #2ecc71;">🔔 Notifikasi</h3>
-                    <div class="form-group">
-                        <label style="display: flex; align-items: center; cursor: pointer;">
-                            <input type="checkbox" checked style="width: auto; margin-right: 10px;">
-                            <div>
-                                <strong>Notifikasi Email</strong><br>
-                                <small style="color: #666;">Terima update mingguan via email</small>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <label style="display: flex; align-items: center; cursor: pointer;">
-                            <input type="checkbox" checked style="width: auto; margin-right: 10px;">
-                            <div>
-                                <strong>Notifikasi Push</strong><br>
-                                <small style="color: #666;">Ingatan aksi hijau harian</small>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-container">
-                    <h3 style="margin-bottom: 20px; color: #2ecc71;">🔒 Privasi & Keamanan</h3>
-                    <div class="form-group">
-                        <label style="display: flex; align-items: center; cursor: pointer;">
-                            <input type="checkbox" checked style="width: auto; margin-right: 10px;">
-                            <div>
-                                <strong>Profil Publik</strong><br>
-                                <small style="color: #666;">Tampilkan pencapaian di leaderboard</small>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-secondary" onclick="changePassword()" style="width: 100%;">
-                            🔒 Ubah Password
-                        </button>
-                        <small style="color: #666; display: block; margin-top: 5px;">Keamanan akun Anda</small>
-                    </div>
-                </div>
-
-                <div class="form-container">
-                    <h3 style="margin-bottom: 20px; color: #e74c3c;">🚪 Akun</h3>
-                    <div class="form-group">
-                        <button class="btn btn-secondary" onclick="exportData()" style="width: 100%; margin-bottom: 10px;">
-                            📥 Export Data
-                        </button>
-                        <small style="color: #666; display: block;">Download semua data aktivitasmu</small>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary" onclick="deleteAccount()" style="width: 100%; background: #e74c3c; margin-bottom: 10px;">
-                            🗑️ Hapus Akun
-                        </button>
-                        <small style="color: #e74c3c; display: block;">Semua data akan dihapus permanen</small>
-                    </div>
-                    <button class="btn btn-secondary" onclick="logout()" style="width: 100%;">
-                        🚪 Keluar
-                    </button>
-                    <small style="color: #666; display: block; margin-top: 5px;">Logout dari akun ini</small>
+                    <button class="btn btn-secondary" onclick="logout()" style="width: 100%;">🚪 Log Out</button>
                 </div>
             </div>
         </div>
@@ -1052,17 +852,14 @@
         <div class="dashboard" id="companyDashboard">
             <div class="nav-menu">
                 <button class="nav-item active" onclick="showSection('company', 'dashboard')">📊 Dashboard</button>
-                <button class="nav-item" onclick="showSection('company', 'marketplace')">🛒 Marketplace Karbon</button>
-                <button class="nav-item" onclick="showSection('company', 'portfolio')">💼 Portofolio Saya</button>
-                <button class="nav-item" onclick="showSection('company', 'transactions')">📋 Riwayat Transaksi</button>
-                <button class="nav-item" onclick="showSection('company', 'profile')">🏢 Profil Perusahaan</button>
+                <button class="nav-item" onclick="showSection('company', 'marketplace')">🛒 Marketplace</button>
+                <button class="nav-item" onclick="showSection('company', 'portfolio')">💼 Portofolio</button>
+                <button class="nav-item" onclick="showSection('company', 'profile')">🏢 Profil</button>
             </div>
 
             <!-- Company Dashboard Section -->
             <div class="dashboard-section active" id="company-dashboard">
                 <h2 style="margin-bottom: 20px; color: #2ecc71;">📊 Dashboard Perusahaan</h2>
-                <p style="margin-bottom: 30px;">Kelola pembelian kredit karbon Anda</p>
-
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-icon">🌍</div>
@@ -1080,41 +877,22 @@
                         <div class="stat-label">Total Transaksi</div>
                     </div>
                 </div>
-
-                <div class="form-container">
-                    <h3 style="margin-bottom: 20px; color: #2ecc71;">📈 Ringkasan Aktivitas</h3>
-                    <p>Mulai beli kredit karbon dari marketplace untuk offset emisi perusahaan Anda</p>
-                </div>
             </div>
 
             <!-- Company Marketplace Section -->
             <div class="dashboard-section" id="company-marketplace">
                 <h2 style="margin-bottom: 20px; color: #2ecc71;">🛒 Marketplace Kredit Karbon</h2>
-                <p style="margin-bottom: 30px;">Beli kredit karbon dari individu dan komunitas</p>
-
+                <p style="margin-bottom: 30px;">Beli dari individu & komunitas</p>
                 <div id="marketplaceList">
                     <div class="marketplace-item">
                         <div class="marketplace-info">
-                            <h3>Kredit Karbon - Penanaman Pohon</h3>
-                            <p>Penyedia: Komunitas Hijau Jakarta</p>
-                            <p>Jumlah: 100 kg CO2</p>
-                            <p>Jenis: Reforestasi</p>
+                            <h3>Penanaman Pohon</h3>
+                            <p>Penyedia: Komunitas Hijau</p>
+                            <p>Jumlah: 100 kg CO₂</p>
                         </div>
                         <div class="marketplace-price">
                             Rp 50.000<br>
                             <button class="btn btn-primary" onclick="buyCarbonCredit('reforestasi', 100, 50000)">Beli</button>
-                        </div>
-                    </div>
-                    <div class="marketplace-item">
-                        <div class="marketplace-info">
-                            <h3>Kredit Karbon - Energi Terbarukan</h3>
-                            <p>Penyedia: Green Energy Indonesia</p>
-                            <p>Jumlah: 500 kg CO2</p>
-                            <p>Jenis: Solar Panel</p>
-                        </div>
-                        <div class="marketplace-price">
-                            Rp 200.000<br>
-                            <button class="btn btn-primary" onclick="buyCarbonCredit('energy', 500, 200000)">Beli</button>
                         </div>
                     </div>
                 </div>
@@ -1122,45 +900,19 @@
 
             <!-- Company Portfolio Section -->
             <div class="dashboard-section" id="company-portfolio">
-                <h2 style="margin-bottom: 20px; color: #2ecc71;">💼 Portofolio Kredit Karbon</h2>
-                
+                <h2 style="margin-bottom: 20px; color: #2ecc71;">💼 Portofolio</h2>
                 <table>
                     <thead>
                         <tr>
-                            <th>Tanggal Beli</th>
+                            <th>Tanggal</th>
                             <th>Penyedia</th>
-                            <th>Jenis</th>
                             <th>Jumlah</th>
                             <th>Harga</th>
-                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody id="companyPortfolioTable">
                         <tr>
-                            <td colspan="6" style="text-align: center; color: #666;">Belum ada kredit karbon dalam portofolio</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Company Transactions Section -->
-            <div class="dashboard-section" id="company-transactions">
-                <h2 style="margin-bottom: 20px; color: #2ecc71;">📋 Riwayat Transaksi</h2>
-                
-                <table>
-                    <thead>
-                        <tr>
-                            <th>No. Transaksi</th>
-                            <th>Tanggal</th>
-                            <th>Penyedia</th>
-                            <th>Jumlah</th>
-                            <th>Total</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="companyTransactionsTable">
-                        <tr>
-                            <td colspan="6" style="text-align: center; color: #666;">Belum ada transaksi</td>
+                            <td colspan="4" style="text-align: center; color: #666;">Belum ada portofolio</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1169,22 +921,15 @@
             <!-- Company Profile Section -->
             <div class="dashboard-section" id="company-profile">
                 <h2 style="margin-bottom: 20px; color: #2ecc71;">🏢 Profil Perusahaan</h2>
-                
                 <div class="form-container">
-                    <h3 style="margin-bottom: 20px; color: #2ecc71;">📷 Logo Perusahaan</h3>
                     <div class="form-group" style="text-align: center;">
                         <div class="profile-photo-container" style="margin: 0 auto 15px;">
-                            <img id="companyProfilePhoto" class="profile-photo" src="" alt="Logo Perusahaan" style="display: none;">
+                            <img id="companyProfilePhoto" class="profile-photo" src="" alt="Logo" style="display: none;">
                             <div class="profile-photo" id="companyProfilePhotoPlaceholder">🏢</div>
-                            <label for="companyProfileInput" class="profile-photo-edit" title="Ubah Logo">
-                                📷
-                            </label>
+                            <label for="companyProfileInput" class="profile-photo-edit" title="Ubah Logo">📷</label>
                             <input type="file" id="companyProfileInput" class="profile-photo-input" accept="image/*" onchange="updatePhoto(event, 'company')">
                         </div>
-                        <small style="color: #666;">Klik ikon kamera untuk ubah logo</small>
                     </div>
-                    
-                    <h3 style="margin-bottom: 20px; color: #2ecc71; margin-top: 30px;">Informasi Perusahaan</h3>
                     <div class="form-group">
                         <label>Nama Perusahaan</label>
                         <span id="companyProfileName" style="padding: 10px; background: #f8f9fa; border-radius: 8px; display: block;">-</span>
@@ -1193,27 +938,10 @@
                         <label>Email</label>
                         <span id="companyProfileEmail" style="padding: 10px; background: #f8f9fa; border-radius: 8px; display: block;">-</span>
                     </div>
-                    <div class="form-group">
-                        <label>Status Verifikasi</label>
-                        <div style="padding: 10px; background: #fff3cd; border-radius: 8px; border-left: 4px solid #ffc107;">
-                            <strong>⏳ Menunggu Verifikasi</strong><br>
-                            <small style="color: #666;">Status akun perusahaan</small>
-                        </div>
-                    </div>
-                    <button class="btn btn-secondary" onclick="logout()" style="width: 100%; margin-top: 20px;">
-                        🚪 Log Out
-                    </button>
+                    <button class="btn btn-secondary" onclick="logout()" style="width: 100%;">🚪 Log Out</button>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Install Prompt -->
-    <div id="installPrompt" style="display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); z-index: 1000; max-width: 90%; text-align: center;">
-        <h3 style="color: #2ecc71; margin-bottom: 10px;">📱 Install ReCarbon</h3>
-        <p style="margin-bottom: 15px;">Tambahkan ke layar utama</p>
-        <button class="btn btn-primary" onclick="installApp()" style="margin-right: 10px;">Install</button>
-        <button class="btn btn-secondary" onclick="closeInstallPrompt()">✕</button>
     </div>
 
     <!-- Toast Notification -->
@@ -1225,105 +953,56 @@
         // Global Variables
         let currentUserType = null;
         let currentUser = null;
-        let deferredPrompt = null;
         let userPoints = 0;
         let co2Reduction = 0;
         let carbonCredits = 0;
         let companyCredits = 0;
         let companyInvestment = 0;
         let companyTransactions = 0;
-        
-        // Global Variables for Photo
         let individualPhoto = null;
         let companyPhoto = null;
 
-        // Show Auth Form
         function showAuth(type) {
             document.getElementById('loginForm').classList.remove('active');
             document.getElementById('registerForm').classList.remove('active');
-            
-            if (type === 'login') {
-                document.getElementById('loginForm').classList.add('active');
-            } else {
-                document.getElementById('registerForm').classList.add('active');
-            }
+            document.getElementById(type + 'Form').classList.add('active');
         }
 
-        // Select User Type
         function selectUserType(type) {
             currentUserType = type;
-            
-            // Update UI
-            document.querySelectorAll('.user-type-card').forEach(card => {
-                card.classList.remove('active');
-            });
+            document.querySelectorAll('.user-type-card').forEach(card => card.classList.remove('active'));
             document.getElementById('card-' + type).classList.add('active');
-            
-            // Show company name field for companies
-            if (type === 'company') {
-                document.getElementById('companyNameGroup').style.display = 'block';
-                document.getElementById('nameLabel').textContent = 'Nama Perusahaan';
-            } else {
-                document.getElementById('companyNameGroup').style.display = 'none';
-                document.getElementById('nameLabel').textContent = 'Nama Lengkap / Nama Perusahaan';
-            }
         }
 
-        // Handle Login
         function handleLogin(e) {
             e.preventDefault();
-            
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            
-            // Simple validation
-            if (!email || !password) {
-                showToast('Email dan password harus diisi!', 'error');
-                return;
-            }
-            
-            // Simulate login
             currentUser = {
-                email: email,
+                email: document.getElementById('loginEmail').value,
                 name: 'User',
                 type: currentUserType || 'individual'
             };
-            
             showDashboard();
         }
 
-        // Handle Register
         function handleRegister(e) {
             e.preventDefault();
-            
-            const name = document.getElementById('registerName').value;
-            const email = document.getElementById('registerEmail').value;
             const password = document.getElementById('registerPassword').value;
             const confirmPassword = document.getElementById('registerConfirmPassword').value;
             
-            // Validation
             if (password !== confirmPassword) {
                 showToast('Password tidak cocok!', 'error');
                 return;
             }
             
-            if (password.length < 6) {
-                showToast('Password minimal 6 karakter!', 'error');
-                return;
-            }
-            
-            // Simulate registration
             currentUser = {
-                email: email,
-                name: name,
+                email: document.getElementById('registerEmail').value,
+                name: document.getElementById('registerName').value,
                 type: currentUserType || 'individual'
             };
-            
             showToast('Akun berhasil dibuat!');
             showDashboard();
         }
 
-        // Show Dashboard
         function showDashboard() {
             document.getElementById('userTypeSelector').style.display = 'none';
             document.getElementById('loginForm').classList.remove('active');
@@ -1335,7 +1014,6 @@
             document.getElementById('settingsName').textContent = currentUser.name;
             document.getElementById('settingsEmail').textContent = currentUser.email;
             
-            // Load saved photos
             loadSavedPhotos();
             
             if (currentUser.type === 'company') {
@@ -1343,7 +1021,6 @@
                 document.getElementById('companyDashboard').classList.add('active');
                 document.getElementById('companyProfileName').textContent = currentUser.name;
                 document.getElementById('companyProfileEmail').textContent = currentUser.email;
-                updateCompanyStats();
             } else {
                 document.getElementById('companyDashboard').classList.remove('active');
                 document.getElementById('individualDashboard').classList.add('active');
@@ -1351,173 +1028,116 @@
             }
         }
 
-        // Show Section
         function showSection(userType, section) {
-            // Update nav items
-            const navMenu = userType === 'individual' ? 
-                document.querySelector('#individualDashboard .nav-menu') : 
-                document.querySelector('#companyDashboard .nav-menu');
-            
-            navMenu.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
+            const navMenu = document.querySelector('#' + userType + 'Dashboard .nav-menu');
+            navMenu.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             event.target.classList.add('active');
             
-            // Show section
-            const sections = userType === 'individual' ? 
-                document.querySelectorAll('#individualDashboard .dashboard-section') : 
-                document.querySelectorAll('#companyDashboard .dashboard-section');
-            
-            sections.forEach(section => section.classList.remove('active'));
+            const sections = document.querySelectorAll('#' + userType + 'Dashboard .dashboard-section');
+            sections.forEach(s => s.classList.remove('active'));
             document.getElementById(userType + '-' + section).classList.add('active');
         }
 
-        // Show Action Form
         function showActionForm(type) {
             const form = document.getElementById('actionForm');
-            const title = document.getElementById('actionFormTitle');
-            
             form.classList.remove('hidden');
-            
-            // Reset all groups
             document.getElementById('transportRouteGroup').classList.add('hidden');
             document.getElementById('treeTypeGroup').classList.add('hidden');
             document.getElementById('materialTypeGroup').classList.add('hidden');
-            document.getElementById('electricityBillGroup').classList.add('hidden');
-            document.getElementById('quantityLabel').textContent = '(km)';
             
-            switch(type) {
-                case 'transport':
-                    title.textContent = '🚴 Aksi Transportasi Hijau';
-                    document.getElementById('transportRouteGroup').classList.remove('hidden');
-                    document.getElementById('quantityLabel').textContent = '(km)';
-                    break;
-                case 'plant':
-                    title.textContent = '🌱 Aksi Tanam Pohon';
-                    document.getElementById('treeTypeGroup').classList.remove('hidden');
-                    document.getElementById('quantityLabel').textContent = '(pohon)';
-                    break;
-                case 'recycle':
-                    title.textContent = '♻️ Aksi Daur Ulang';
-                    document.getElementById('materialTypeGroup').classList.remove('hidden');
-                    document.getElementById('quantityLabel').textContent = '(kg)';
-                    break;
-                case 'energy':
-                    title.textContent = '⚡ Aksi Hemat Energi';
-                    document.getElementById('electricityBillGroup').classList.remove('hidden');
-                    document.getElementById('quantityLabel').textContent = '(kWh)';
-                    break;
+            if (type === 'transport') {
+                document.getElementById('actionFormTitle').textContent = '🚴 Transport Hijau';
+                document.getElementById('transportRouteGroup').classList.remove('hidden');
+                document.getElementById('quantityLabel').textContent = '(km)';
+            } else if (type === 'plant') {
+                document.getElementById('actionFormTitle').textContent = '🌱 Tanam Pohon';
+                document.getElementById('treeTypeGroup').classList.remove('hidden');
+                document.getElementById('quantityLabel').textContent = '(pohon)';
+            } else if (type === 'recycle') {
+                document.getElementById('actionFormTitle').textContent = '♻️ Daur Ulang';
+                document.getElementById('materialTypeGroup').classList.remove('hidden');
+                document.getElementById('quantityLabel').textContent = '(kg)';
+            } else {
+                document.getElementById('actionFormTitle').textContent = '⚡ Hemat Energi';
+                document.getElementById('quantityLabel').textContent = '(kWh)';
             }
-            
-            form.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Hide Action Form
         function hideActionForm() {
             document.getElementById('actionForm').classList.add('hidden');
         }
 
-        // Get Location
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        document.getElementById('locationStatus').textContent = 
-                            '✅ Lokasi: ' + position.coords.latitude.toFixed(4) + ', ' + position.coords.longitude.toFixed(4);
+                    (p) => {
+                        document.getElementById('locationStatus').textContent = '✅ ' + p.coords.latitude.toFixed(2) + ', ' + p.coords.longitude.toFixed(2);
                     },
-                    (error) => {
-                        document.getElementById('locationStatus').textContent = '❌ Gagal mendapatkan lokasi';
+                    () => {
+                        document.getElementById('locationStatus').textContent = '❌ Gagal';
                     }
                 );
-            } else {
-                document.getElementById('locationStatus').textContent = '❌ Geolocation tidak didukung';
             }
         }
 
-        // Submit Action
         function submitAction() {
             const quantity = parseFloat(document.getElementById('actionQuantity').value);
-            const date = document.getElementById('actionDate').value;
-            const photo = document.getElementById('actionPhoto').files[0];
-            
-            if (!quantity || !date || !photo) {
-                showToast('Lengkapi semua persyaratan!', 'error');
+            if (!quantity) {
+                showToast('Isi jumlah!', 'error');
                 return;
             }
             
-            // Calculate points and CO2 reduction
-            const points = Math.floor(quantity * 10);
-            const co2 = quantity * 2.5;
-            
-            userPoints += points;
-            co2Reduction += co2;
-            carbonCredits += co2;
+            userPoints += Math.floor(quantity * 10);
+            co2Reduction += quantity * 2.5;
+            carbonCredits += quantity * 2.5;
             
             updateIndividualStats();
             hideActionForm();
-            showToast('Aksi hijau berhasil dikirim! +' + points + ' poin');
+            showToast('Aksi berhasil! +' + Math.floor(quantity * 10) + ' poin');
         }
 
-        // Update Individual Stats
         function updateIndividualStats() {
             document.getElementById('indTotalPoints').textContent = userPoints;
             document.getElementById('indCO2Reduction').textContent = co2Reduction.toFixed(1) + ' kg';
-            document.getElementById('indMonthlyActions').textContent = Math.floor(userPoints / 100);
-            document.getElementById('indNextLevel').textContent = userPoints + '/1000';
-            document.getElementById('individualCarbonCredits').textContent = carbonCredits.toFixed(1) + ' kg CO2';
+            document.getElementById('indCarbonCredits').textContent = carbonCredits.toFixed(1) + ' kg';
+            document.getElementById('individualCarbonCredits').textContent = carbonCredits.toFixed(1) + ' kg CO₂';
             document.getElementById('availablePoints').textContent = userPoints + ' Poin';
-            
-            const progress = (userPoints % 1000) / 10;
-            document.getElementById('levelProgress').style.width = progress + '%';
+            document.getElementById('indNextLevel').textContent = userPoints + '/1000';
+            document.getElementById('levelProgress').style.width = (userPoints % 1000) / 10 + '%';
         }
 
-        // Redeem Reward
         function redeemReward(cost) {
             if (userPoints >= cost) {
                 userPoints -= cost;
                 updateIndividualStats();
-                showToast('Reward berhasil ditukar!');
+                showToast('Reward ditukar!');
             } else {
                 showToast('Poin tidak cukup!', 'error');
             }
         }
 
-        // Buy Carbon Credit (Company)
         function buyCarbonCredit(type, amount, price) {
             companyCredits += amount;
             companyInvestment += price;
             companyTransactions++;
-            
-            updateCompanyStats();
-            showToast('Kredit karbon berhasil dibeli!');
-        }
-
-        // Update Company Stats
-        function updateCompanyStats() {
             document.getElementById('compTotalCredits').textContent = companyCredits + ' kg';
             document.getElementById('compTotalInvestment').textContent = 'Rp ' + companyInvestment.toLocaleString();
             document.getElementById('compTotalTransactions').textContent = companyTransactions;
+            showToast('Kredit dibeli!');
         }
 
-        // Update Photo Function
         function updatePhoto(event, location) {
             const file = event.target.files[0];
+            if (!file) return;
             
-            if (!file) {
-                showToast('❌ Tidak ada file yang dipilih!', 'error');
-                return;
-            }
-            
-            // Validate file type
             const validTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
             if (!validTypes.includes(file.type)) {
-                showToast('❌ Format file tidak valid! Gunakan JPG, PNG, atau WEBP', 'error');
+                showToast('Format tidak valid!', 'error');
                 return;
             }
             
-            // Validate file size (max 2MB)
             if (file.size > 2 * 1024 * 1024) {
-                showToast('❌ Ukuran file terlalu besar! Maksimal 2MB', 'error');
+                showToast('Max 2MB!', 'error');
                 return;
             }
             
@@ -1525,48 +1145,26 @@
             reader.onload = function(e) {
                 const photoData = e.target.result;
                 
-                if (location === 'header') {
-                    // Update header photo
-                    if (currentUser.type === 'company') {
-                        companyPhoto = photoData;
-                        localStorage.setItem('companyPhoto', photoData);
-                        displayPhoto('headerProfilePhoto', 'headerProfilePhotoPlaceholder', photoData);
-                        displayPhoto('companyProfilePhoto', 'companyProfilePhotoPlaceholder', photoData);
-                    } else {
-                        individualPhoto = photoData;
-                        localStorage.setItem('individualPhoto', photoData);
-                        displayPhoto('headerProfilePhoto', 'headerProfilePhotoPlaceholder', photoData);
-                        displayPhoto('settingsProfilePhoto', 'settingsProfilePhotoPlaceholder', photoData);
-                    }
-                } else if (location === 'settings') {
-                    // Update settings photo
+                if (location === 'header' || location === 'settings') {
                     individualPhoto = photoData;
                     localStorage.setItem('individualPhoto', photoData);
                     displayPhoto('headerProfilePhoto', 'headerProfilePhotoPlaceholder', photoData);
                     displayPhoto('settingsProfilePhoto', 'settingsProfilePhotoPlaceholder', photoData);
                 } else if (location === 'company') {
-                    // Update company photo
                     companyPhoto = photoData;
                     localStorage.setItem('companyPhoto', photoData);
                     displayPhoto('headerProfilePhoto', 'headerProfilePhotoPlaceholder', photoData);
                     displayPhoto('companyProfilePhoto', 'companyProfilePhotoPlaceholder', photoData);
                 }
                 
-                showToast('✅ Foto profil berhasil diupdate!');
+                showToast('Foto diupdate!');
             };
-            
-            reader.onerror = function() {
-                showToast('❌ Gagal membaca file!', 'error');
-            };
-            
             reader.readAsDataURL(file);
         }
 
-        // Display Photo Function
         function displayPhoto(imgId, placeholderId, photoData) {
             const img = document.getElementById(imgId);
             const placeholder = document.getElementById(placeholderId);
-            
             if (img && placeholder) {
                 img.src = photoData;
                 img.style.display = 'block';
@@ -1574,178 +1172,47 @@
             }
         }
 
-        // Load Saved Photos
         function loadSavedPhotos() {
-            // Load individual photo
-            const savedIndividualPhoto = localStorage.getItem('individualPhoto');
-            if (savedIndividualPhoto) {
-                individualPhoto = savedIndividualPhoto;
-                displayPhoto('headerProfilePhoto', 'headerProfilePhotoPlaceholder', savedIndividualPhoto);
-                displayPhoto('settingsProfilePhoto', 'settingsProfilePhotoPlaceholder', savedIndividualPhoto);
+            const indPhoto = localStorage.getItem('individualPhoto');
+            if (indPhoto) {
+                displayPhoto('headerProfilePhoto', 'headerProfilePhotoPlaceholder', indPhoto);
+                displayPhoto('settingsProfilePhoto', 'settingsProfilePhotoPlaceholder', indPhoto);
             }
             
-            // Load company photo
-            const savedCompanyPhoto = localStorage.getItem('companyPhoto');
-            if (savedCompanyPhoto) {
-                companyPhoto = savedCompanyPhoto;
-                displayPhoto('headerProfilePhoto', 'headerProfilePhotoPlaceholder', savedCompanyPhoto);
-                displayPhoto('companyProfilePhoto', 'companyProfilePhotoPlaceholder', savedCompanyPhoto);
+            const compPhoto = localStorage.getItem('companyPhoto');
+            if (compPhoto) {
+                displayPhoto('headerProfilePhoto', 'headerProfilePhotoPlaceholder', compPhoto);
+                displayPhoto('companyProfilePhoto', 'companyProfilePhotoPlaceholder', compPhoto);
             }
         }
 
-        // Edit Profile
-        function editProfile() {
-            const newName = prompt('Masukkan nama baru:', currentUser.name);
-            if (newName) {
-                currentUser.name = newName;
-                document.getElementById('settingsName').textContent = newName;
-                document.getElementById('userNameDisplay').textContent = newName;
-                showToast('Profil berhasil diupdate!');
-            }
-        }
-
-        // Change Password
-        function changePassword() {
-            const oldPass = prompt('Masukkan password lama:');
-            const newPass = prompt('Masukkan password baru:');
-            if (oldPass && newPass) {
-                showToast('Password berhasil diubah!');
-            }
-        }
-
-        // Export Data
-        function exportData() {
-            const data = {
-                user: currentUser,
-                points: userPoints,
-                co2Reduction: co2Reduction,
-                carbonCredits: carbonCredits,
-                individualPhoto: individualPhoto,
-                companyPhoto: companyPhoto
-            };
-            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'recarbon-data.json';
-            a.click();
-            showToast('Data berhasil diexport!');
-        }
-
-        // Delete Account
-        function deleteAccount() {
-            if (confirm('Apakah Anda yakin ingin menghapus akun? Semua data akan hilang permanen.')) {
-                if (confirm('⚠️ Konfirmasi sekali lagi. Yakin hapus akun?')) {
-                    // Clear all data including photos
-                    localStorage.removeItem('individualPhoto');
-                    localStorage.removeItem('companyPhoto');
-                    localStorage.removeItem('userData');
-                    showToast('Akun berhasil dihapus');
-                    setTimeout(() => location.reload(), 2000);
-                }
-            }
-        }
-
-        // Reset Data
-        function resetData() {
-            if (confirm('Reset semua data aktivitas?')) {
-                userPoints = 0;
-                co2Reduction = 0;
-                carbonCredits = 0;
-                updateIndividualStats();
-                showToast('Data berhasil direset!');
-            }
-        }
-
-        // Logout
         function logout() {
-            // Don't clear photos on logout (keep them for next login)
-            // If you want to clear photos, uncomment below:
-            // localStorage.removeItem('individualPhoto');
-            // localStorage.removeItem('companyPhoto');
-            
-            currentUser = null;
-            currentUserType = null;
             location.reload();
         }
 
-        // Show Toast
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
             toast.textContent = (type === 'error' ? '❌ ' : '✅ ') + message;
             toast.style.background = type === 'error' ? '#e74c3c' : '#2ecc71';
             toast.style.display = 'block';
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 3000);
+            setTimeout(() => toast.style.display = 'none', 3000);
         }
 
-        // Install PWA
-        function installApp() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then(() => {
-                    deferredPrompt = null;
-                });
-            }
-            closeInstallPrompt();
-        }
-
-        function closeInstallPrompt() {
-            document.getElementById('installPrompt').style.display = 'none';
-        }
-
-        // Password Strength Checker
+        // Password Strength
         document.getElementById('registerPassword')?.addEventListener('input', function(e) {
-            const password = e.target.value;
-            const strengthBar = document.getElementById('passwordStrength');
+            const pwd = e.target.value;
+            const bar = document.getElementById('passwordStrength');
             let strength = 0;
-            
-            if (password.length >= 6) strength += 25;
-            if (password.length >= 10) strength += 25;
-            if (/[A-Z]/.test(password)) strength += 25;
-            if (/[0-9]/.test(password)) strength += 25;
-            
-            strengthBar.style.width = strength + '%';
-            
-            if (strength < 50) {
-                strengthBar.style.background = '#e74c3c';
-            } else if (strength < 75) {
-                strengthBar.style.background = '#f39c12';
-            } else {
-                strengthBar.style.background = '#2ecc71';
-            }
+            if (pwd.length >= 6) strength += 25;
+            if (pwd.length >= 10) strength += 25;
+            if (/[A-Z]/.test(pwd)) strength += 25;
+            if (/[0-9]/.test(pwd)) strength += 25;
+            bar.style.width = strength + '%';
+            bar.style.background = strength < 50 ? '#e74c3c' : strength < 75 ? '#f39c12' : '#2ecc71';
         });
 
-        // Service Worker Registration
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(registration => {
-                        console.log('SW registered:', registration);
-                    })
-                    .catch(error => {
-                        console.log('SW registration failed:', error);
-                    });
-            });
-        }
-
-        // Install Prompt Event
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            document.getElementById('installPrompt').style.display = 'block';
-        });
-
-        // Initialize
         window.onload = function() {
-            // Set today's date as default
-            const dateInput = document.getElementById('actionDate');
-            if (dateInput) {
-                dateInput.valueAsDate = new Date();
-            }
-            
-            // Load saved photos on page load
+            document.getElementById('actionDate').valueAsDate = new Date();
             loadSavedPhotos();
         };
     </script>
