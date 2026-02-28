@@ -1,0 +1,24 @@
+{
+  "name": "ReCarbon - Jejak Karbon",
+  "short_name": "ReCarbon",
+  "description": "Platform pelacak jejak karbon dan aksi hijau Indonesia",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#f4f7f6",
+  "theme_color": "#2ecc71",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "logo-recarbon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo-recarbon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
